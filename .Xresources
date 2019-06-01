@@ -1,0 +1,23 @@
+! $Id:$
+XTerm*ttyModes:	intr ^C quit ^\ erase ^H kill ^U eof ^D start ^Q stop ^S susp ^Z dsusp ^Y rprnt ^R weras ^W lnext ^V
+XTerm*saveLines: 9000
+XConsole*font:	-adobe-courier-medium-r-*-*-10-*-75-75-*-*-*-*
+! buttons on NS 3.x history window
+*fontList:	-*-helvetica-bold-r-*-*-10-*-*-*-*-*-iso8859-*
+! single-line text entry fields
+*XmTextField.fontList:	-adobe-courier-medium-r-*-*-12-120-*-*-*-*-iso8859-*
+! bookmark editor description area (multi-line fields)
+*XmText.fontList:	-adobe-courier-medium-r-*-*-12-120-*-*-*-*-iso8859-*
+! history list in NS
+*XmList*fontList:	-adobe-courier-medium-r-*-*-12-120-*-*-*-*-iso8859-*
+! menu bar items
+*menuBar*fontList:	-*-helvetica-bold-r-*-*-*-100-*-*-*-*-iso8859-*
+! I suppose this is when its too long to fit on one page
+*menuBar*historyTruncated.fontList:\
+	-*-helvetica-medium-o-*-*-9-*-*-*-*-*-iso8859-*
+! fonts used in NSs outline lists used in Mail, News, Bookmarks, and Address
+! Book windows (note that there can not be any whitespace after the commas)
+*XmLGrid*fontList:\
+-*-clean-medium-r-*-*-10-100-*-*-*-60-iso8859-*,\
+-*-clean-bold-r-*-*-*-100-*-*-*-60-iso8859-*=BOLD,\
+-adobe-courier-medium-i-*-*-10-100-*-*-*-*-*-*=ITALIC
