@@ -9,4 +9,6 @@ I hope you can benefit from all the work that went into these.
 # startup shell scripts
 I'm starting with my shell startup scripts and will gradually add more.
 
-One of the key takeaways is that anything you would normally put into .profile can go into .profile.local
+One of the key takeaways is that anything you would normally put into .profile can go into .profile.local, or .bashrc and .bashrc.local
+
+That enables you to update these files without stomping on your local changes.
