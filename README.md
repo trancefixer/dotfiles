@@ -218,3 +218,79 @@ export INFOPATH
 # Set the search path for python programs.
 dirapplist PYTHONPATH /lusr/lib/python2.3/site-packages # TODO: remove this hack
 ```
+
+Note that I mark these variables as exportable. In general my policy is to do so the first time I manipulate the variable.
+You can't do `export VAR=VAL` in ash, so I do that on a separate line in .profile and .kshrc
+
+```
+## Do shell-specific handling:
+# This code distinguishes between various shell versions.
+if test "$(echo ~)" != "$HOME"
+then
+    # This is the standard Bourne shell.                                    
+    :
+else
+    # TODO: Figure out a deterministic way to distinguish shells.
+    # Should I just check $SHELL instead?
+    if test "${RANDOM:-0}" -eq "${RANDOM:-0}"
+    then
+        # Tell ash where to find our shell functions.
+        # NOTE: We can't use dirapp because %func isn't part of the path.
+        test_directory "$HOME/functions" && PATH="$PATH:$HOME/functions%func"
+    fi
+fi
+```
+This code tries to figure out which `sh` variant we are using. It then takes care of the shell-dependent initialization commands.
+Note that since it uses dirapp, it has to occur after its definition, else I would have placed it earlier in the file.
+
+
+```
+# Do we support aliases?
+if alias test=test > /dev/null 2>&1
+then
+    unalias test
+    for alias_file in .bashrc .kshrc
+    do
+      alias_file="$HOME/$alias_file"
+      if test -r "$alias_file"
+      then
+          echo Loading aliases from "$alias_file"
+          export ENV="$alias_file"
+          # NB: to get aliases in login shell you need to source it.                     
+          . "$ENV"
+      fi
+    done
+fi
+```
+Here we test to see if our shell supports aliases - this time by a direct test - and if it does, it loads the proper .rc file into the
+login shell.  That's necessary because login shells don't default to loading these files (at least when I wrote it).
+```
+# Do we need the type functionality?
+if type type > /dev/null 2>&1
+then
+    :
+else
+    test -r "$HOME/.ashtype" && . "$HOME/.ashtype"
+fi
+```
+This section is a little kluge to help /bin/ash support the `type` shell builtin.
+```
+## Run this stuff on logout.
+if test -r "$HOME/.shlogout"
+then
+    trap '. $HOME/.shlogout' 0
+else
+    # Make a reasonable attempt to clear the screen.
+    trap 'clear' 0
+fi
+```
+This code takes care of cleaning up when we log out. If `$HOME/.shlogout` exists and is readable, we evaluate that and exit
+with the last command's exit code; otherwise we just clear the screen so that we don't leave our work showing.
+That is, this code runs when a login shell exits.
+If the logout process varied from site to site, it might be more appropriate to put it in the site-specific section.
+
+(more to come)
+
+This section makes sure to run `$HOME/.shlogout' when the login shell exits so you can clean some things up.
+There's a `clear` command in here because this harkens back to the days of green screens,
+and you wanted to not leave personal data behind.  You could easily do some kind of disk wiping or encryption here.
