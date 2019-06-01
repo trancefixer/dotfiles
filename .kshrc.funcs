@@ -1,6 +1,7 @@
-# -*- mode:sh -*-
-# $Id:$
-# do not edit the copy in the home directory
+# Hey EMACS this is -*- mode:sh -*-
+# $Id$
+# Managed in https://github.com/trancefixer/homedir; Do not edit the copy in the home directory
+# To customize this script, put commands in the file $HOME/.kshrc.funcs.local
 
 # syntax from sh(1) to detect interactive shells
 case $- in *i*)

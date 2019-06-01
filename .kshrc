@@ -1,6 +1,8 @@
-# -*- mode:sh -*-
+# Hey EMACS this is -*- mode:sh -*-
 # $Id$
-# do not edit the copy in the home directory
+# Managed in https://github.com/trancefixer/homedir; do not edit the copy in the home directory
+# To customize this script, put commands in the file $HOME/.kshrc.local
+
 # this is read for EVERY invocation of the shell, so keep it short
 # NOTE: never print any output from this; it screws up rsh
 
