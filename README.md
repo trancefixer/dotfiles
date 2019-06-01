@@ -90,8 +90,7 @@ The third line tells you not to touch this verison, the fourth line where to add
 
 Next I tell the user that the `.profile` is actually being run:
 
-```
-## Show login stuff:
+```## Show login stuff:
 
 # Echo message to fd 2 (stderr).
 e2 () { echo "$@" >&2; }
@@ -113,3 +112,104 @@ Next I inform the OS that I wish to make all my files shared only by my group:
 ## Set a semi-paranoid umask.
 umask 007
 ```
+
+Next I want to make sure that this `.profile` can find the programs I want to invoke, so I must attend to setting the
+`PATH` environment variable, which controls the search path for said programs.
+Clearly I will want some functions to help me manipulate the colon-seperated list of directories:
+
+```## Set colon-seperated search path elements:
+
+# Test a directory (sanity check).
+# Returns true (0) only if it is a directory and searchable.
+test_directory () {
+    test "$#" -eq 0 && e2 "Usage: test_directory dirname" && return 2
+    test -d "$1" && test -x "$1"
+}
+
+# Canonicalize a directory name by dereferencing symlinks.
+canonicalize_directory () {
+    test_directory "$1" && echo $(cd "$1"; /bin/pwd)
+}
+
+# Check to see if a directory is already in a search path.
+in_search_path () {
+    test "$#" -lt 2 && e2 "Usage: in_search_path path dirname" && return 2
+    local n="$1"
+    local d="$2"
+    eval 'case $'$n' in *:'$d':*) return 0; esac'
+    return 1
+}
+
+# Sanity-check then append a directory to a search path.
+dirapp () {
+    test "$#" -lt 2 && e2 "Usage: dirapp varname dirname" && return 2
+    local n="$1"
+    local d="$2"
+    d=$(canonicalize_directory "$d") || return 1
+    eval in_search_path \"\$$n\" $d && return 1
+    if eval test -n \"\$$n\"; then
+        eval $n=\"\$$n:$d\"
+    else
+        eval $n=\"$d\"
+    fi
+}
+# Call dirapp for a list of directories.
+dirapplist () {
+    test "$#" -lt 2 && e2 "Usage: dirapplist varname d1 d2 ..." && return 2
+    local n="$1"
+    shift
+    while test "$#" -gt 0; do
+        dirapp "$n" "$1"
+        shift
+    done
+}
+
+# Call dirpre for a list of directories.
+# NOTE: Directories will appear in reverse order in varname.
+dirprelist () {
+    test "$#" -lt 2 && e2 "Usage: dirapplist varname d1 d2 ..." && return 2
+    local n="$1"
+    shift
+    while test "$#" -gt 0; do
+        dirpre "$n" "$1"
+        shift
+    done
+}
+
+manpath () {
+    test "$#" -lt 2 && e2 "Usage: manpath base1 base2 ..." && return 2
+    local n="$1"
+    shift
+    while test "$#" -gt 0; do
+        dirapplist MANPATH "$n"/share/man "$n"/man
+        shift
+    done
+}
+```
+
+Note that I try to use the term `path` to refer to a slash-seperated list of directories, starting with the root and ending with
+a file or directory, whereas I use the term `search path` to refer to a colon-seperated list of paths.
+
+For usage errors I return 2 to distinguish from the exit code of the last command, which could be 0 or 1 or -1.
+
+Next I set up `PATH` elements which should always be present.
+I think all reasonable operating systems start `PATH` with these elements, but it shouldn't hurt much to be sure:
+
+```# These should be present on any target system.
+# In fact, they should already be in the search path.
+dirapplist PATH /bin /usr/bin
+# I like to be able to run e.g. ifconfig, sendmail.
+dirapplist PATH /sbin /usr/sbin /usr/games /usr/libexec
+dirpre PATH /usr/ucb
+export PATH
+
+# Set the search path for manual pages.
+dirapplist MANPATH /usr/share/man /usr/share/man/old /usr/contrib/man
+export MANPATH
+
+# Set the search path for info pages.
+dirapplist INFOPATH /usr/share/info
+export INFOPATH
+
+# Set the search path for python programs.
+dirapplist PYTHONPATH /lusr/lib/python2.3/site-packages # TODO: remove this hack```
