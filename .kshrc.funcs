@@ -7,9 +7,9 @@ case $- in *i*)
 
     ### commands for interactive use only
 
-    ## Used by other functions
+    ## shell functions used by other functions
 
-    # error message
+    # error message to STDERR (fd2)
     e2 () { echo "$@" >&2; }
 
     ## SVN-related
@@ -86,3 +86,5 @@ case $- in *i*)
     }
 
 esac
+
+test -r "$HOME/.kshrc.funcs.local" && . "$HOME/.kshrc.funcs.local"
