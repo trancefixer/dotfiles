@@ -1,0 +1,5 @@
+audio/*: mp3, wav: audio file
+	 : vlc $file
+video/*: avi, mp4, mkv: video file
+	 : vlc $file
+
