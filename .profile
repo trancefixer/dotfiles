@@ -39,9 +39,9 @@ canonicalize_directory () {
 # Check to see if a directory is already in a search path.
 in_search_path () {
     test "$#" -lt 2 && e2 "Usage: in_search_path path dirname" && return 2
-    local n="$1"
-    local d="$2"
-    eval 'case $'$n' in *:'$d':*) return 0; esac'
+    local name="$1"
+    local dir="$2"
+    eval 'case ":'"$name"':" in *:'"$dir"':*) return 0; esac'
     return 1
 }
 
