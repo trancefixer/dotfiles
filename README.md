@@ -75,3 +75,41 @@ might be cleaner to test for the presence of `/sbin` and handle adding it to the
 Also note that I usually don't bother to preserve environment variables that are already set via `/etc/profile`, although
 you may wish to do so.
 
+### the .profile line-by-line
+
+Here's a blow-by-blow for the file (could be out of date)
+```# Hey EMACS this is -*- mode:sh -*-
+# $Id: 5b47391d2186332499cdb604a33d41b1888903c4 $
+# Managed in https://github.com/trancefixer/homedir; do not edit the copy in the home directory
+# To customize this script, put commands in the file $HOME/.profile.local
+```
+
+The first line tells EMACS that this is a shell script in the following line (I believe that more recent versions of EMACS allow mode:sh).
+The second line tracks the hash of this version of the script.
+The third line tells you not to touch this verison, the fourth line where to add your customizations.
+
+Next I tell the user that the `.profile` is actually being run:
+
+```
+## Show login stuff:
+
+# Echo message to fd 2 (stderr).
+e2 () { echo "$@" >&2; }
+```
+The first thing the `.profile` should do is have an indication that it has been invoked.
+This lets the user know that e.g. ssh actually worked and the system isn't hung.
+This is particularly useful for diagnosing when the startup script is buggy and blocking on e.g. NFS mounts,
+as well as give a visual indicator of how heavy the system load is (if it takes a long time to show this, the load is extremely heavy).
+This code snippet defines a function (e2) which echoes all of its arguments to the standard error file descriptor
+(read that operator as "standard output gets tied to fd 2"). There are occasions where standard output is buffered,
+but standard error is usually line-buffered at most, so that is why I use it.
+Note the use of double-quoted `$@`; this incantation preserves whitespace and argument boundaries, even if the arguments
+include whitespace. It is a good idea to get into the habit of using this in preference to the boundary-destroying `$*`.
+The code snippet then invokes e2 to display a simple message. Should you wish, you could easily test for the presence of
+a `~/.nologin` file to supress printing any output.
+
+Next I inform the OS that I wish to make all my files shared only by my group:
+```
+## Set a semi-paranoid umask.
+umask 007
+```
