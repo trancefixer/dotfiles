@@ -1,0 +1,18 @@
+# Write your default config options here!
+fs=1
+stop-xscreensaver=yes
+autosync=30
+framedrop=yes
+vo=vdpau,xv
+#cache=8192
+osdlevel=1
+softvol=yes
+idx=1
+volstep=10
+af=volume=-10
+subfont-text-scale=3
+monitoraspect=16:9
+ao=arts,alsa,oss
+slang=en
+dvd-device=/dev/dvd
+quiet=1

@@ -1,0 +1,5 @@
+base=~/Maildir
+mfolder=results
+maildir=*...
+omit=results**
+database=~/.mairix_database
