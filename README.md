@@ -216,4 +216,5 @@ dirapplist INFOPATH /usr/share/info
 export INFOPATH
 
 # Set the search path for python programs.
-dirapplist PYTHONPATH /lusr/lib/python2.3/site-packages # TODO: remove this hack```
+dirapplist PYTHONPATH /lusr/lib/python2.3/site-packages # TODO: remove this hack
+```
