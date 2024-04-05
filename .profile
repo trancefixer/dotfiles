@@ -566,7 +566,7 @@ if test -z "$DISPLAY"; then
         then
                 sx
         else
-                if test -z "$SSH_AGENT_PID"
+                if test -z "$SSH_AGENT_PID" && test -z "$SSH_AUTH_SOCK"
                 then
                     test -f "$HOME/.profile.local" && . "$HOME/.profile.local"
                     # TODO: this is incompatible with ksh
