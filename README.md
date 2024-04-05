@@ -6,6 +6,16 @@ I think they've proven useful and stable enough that they should work in most Un
 You will see old stuff in here.  Do not be surprised to see mention of SunOS and AIX and systems without X11.
 I hope you can benefit from all the work that went into these.
 
+## installation ##
+
+```
+mkdir $HOME/src
+cd $HOME/src
+git clone git@github.com:trancefixer/dotfiles.git
+cd dotfiles
+cp -pR . $HOME
+```
+
 ## what shells read what files
 
 ash reads:
