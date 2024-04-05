@@ -1,5 +1,4 @@
 #! /bin/sh -
-# $Id:$
 # This should be, but is not, a builtin in /bin/ash.
 
 type () {
