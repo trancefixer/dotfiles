@@ -425,6 +425,7 @@ if PAGER=$(findinpath less); then
     export LESS
 
     if true
+    then
          # latin1 Selects  the  ISO 8859/1 character set.  latin-1 is
          #        the same as ASCII, except  characters  between  161
          #        and 255 are treated as normal characters.
