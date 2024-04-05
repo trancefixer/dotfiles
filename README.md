@@ -25,14 +25,14 @@ pdksh reads:
 - .profile (once at login)
 - $ENV (with each invocation)
 
-Therefore:
+Therefore, these files are read by these shells:
 
-| file | read by |
-| ---- | ------- |
-| .bash_profile | bash |
-| .bash_login | bash |
-| .profile | ash bash ksh sh |
-| $ENV | ash bash ksh |
+| file | sh | ash | pdksh | bash |
+| ---- | -- | --- | ----- | ---- |
+| .bash_profile | | | | Y |
+| .bash_login | | | | Y |
+| .profile | Y | Y | Y | Y |
+| $ENV | | Y | Y | Y |
 
 To test a created .procmailrc, use:
 procmail -Yf- -m TEST=yes .procmailrc
