@@ -1,5 +1,7 @@
-#
+# Hey EMACS this is -*- mode:sh -*-
 # $Id$
+# Managed in https://github.com/trancefixer/homedir; Do not edit the copy in the home directory
+# To customize this script, put commands in the file $HOME/.kshrc.local
 
 # I know, you're asking; why is this in the .rc file?
 # Because I don't want Bourne sub-shells getting this PS1; it doesn't work.
