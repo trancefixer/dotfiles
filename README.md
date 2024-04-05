@@ -9,11 +9,10 @@ I hope you can benefit from all the work that went into these.
 ## installation ##
 
 ```
-mkdir $HOME/src
-cd $HOME/src
-git clone git@github.com:trancefixer/dotfiles.git
-cd dotfiles
-cp -pR . $HOME
+This will copy these dotfiles
+mkdir $HOME/src && (cd $HOME/src && git clone git@github.com:trancefixer/dotfiles.git)
+This will install these dotfiles over your $HOME, so be very careful
+(cd $HOME/src/dotfiles && cp -piR ./ $HOME/)
 ```
 
 ## what shells read what files
