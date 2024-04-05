@@ -6,6 +6,41 @@ I think they've proven useful and stable enough that they should work in most Un
 You will see old stuff in here.  Do not be surprised to see mention of SunOS and AIX and systems without X11.
 I hope you can benefit from all the work that went into these.
 
+## what shells read what files
+
+ash reads:
+- .profile (once at login)
+- $ENV (with each invocation)
+
+bash reads:
+- .bash_profile (once at login)
+- .bash_login (once at login)
+- .profile (once at login)
+- $ENV or .bashrc (with each invocation)
+
+sh reads:
+- .profile (once at login)
+
+pdksh reads:
+- .profile (once at login)
+- $ENV (with each invocation)
+
+Therefore:
+
+| file | read by |
+| ---- | ------- |
+| .bash_profile | bash |
+| .bash_login | bash |
+| .profile | ash bash ksh sh |
+| $ENV | ash bash ksh |
+
+To test a created .procmailrc, use:
+procmail -Yf- -m TEST=yes .procmailrc
+Then, input a test message on STDIN.
+You may also want to set LOGNAME.
+Expect a spurious bounce on large emails, but look for the first rule matched
+
+
 ## startup shell scripts
 I'm starting with my shell startup scripts and will gradually add more.
 
