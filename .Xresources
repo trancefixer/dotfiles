@@ -1,5 +1,5 @@
 XTerm*ttyModes:	intr ^C quit ^\ erase ^H kill ^U eof ^D start ^Q stop ^S susp ^Z dsusp ^Y rprnt ^R weras ^W lnext ^V
-XTerm*saveLines: 200
+XTerm*saveLines: 9000
 XConsole*font:	-adobe-courier-medium-r-*-*-10-*-75-75-*-*-*-*
 ! buttons on NS 3.x history window
 *fontList:	-*-helvetica-bold-r-*-*-10-*-*-*-*-*-iso8859-*
