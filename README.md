@@ -9,10 +9,12 @@ I hope you can benefit from all the work that went into these.
 ## startup shell scripts
 I'm starting with my shell startup scripts and will gradually add more.
 
-* .profile
-* .kshrc
+* .profile # sourced at most logins
+* .kshrc # sourced for every subshell
 * .bash_profile # for bash-specific things
 * .bashrc # for bash-specific things
 
 One of the key takeaways is that anything you would normally put into `.profile` can go into `.profile.local` and so on.
 This enables you to update these files without stomping on your local changes.
+
+In general, you should add something to the bourne/ksh shell files unless it's bash-specific.
