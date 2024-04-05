@@ -1,0 +1,12 @@
+# Hey EMACS this is -*- mode:sh -*-
+# $Id: 5548a3cde3f755bad445e818bfafeef6bfddf98f $
+# Managed in https://github.com/trancefixer/homedir; do not edit the copy in the home directory
+# Consider -A; resize all windows attached
+escape ^Ff
+vbell off
+# hardstatus  alwayslastline  "%{= bw} %{= bc}[%{-}%0c%{= bc}]%{-} [%-Lw%{= bW}%{+b}%50>%n%f* %t%{-b}%{= bw}%+Lw]%<" # now better done by byobu
+defscrollback 9999
+# This is necessary to get mutt to not mess up background when you have transparency on.
+# Unfortunately screen-bce is a monochrome terminal
+defbce on
+term screen-bce
