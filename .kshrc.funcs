@@ -47,7 +47,7 @@ case $- in *i*)
     ## SSH-related
 
     # persistent SSH
-    pssh () { while true; do ssh "$@"; sleep 5; done; }
+    sshp () { while true; do ssh "$@"; sleep 5; done; }
 
     # re-establish connection to orphaned ssh-agent(s)
     # TODO - investigate if this needs to be secured better
