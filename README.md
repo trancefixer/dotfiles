@@ -10,9 +10,9 @@ I hope you can benefit from all the work that went into these.
 
 ```
 # This will copy these dotfiles
-mkdir $HOME/src && (cd $HOME/src && git clone git@github.com:trancefixer/dotfiles.git)
+mkdir $HOME/src && (cd $HOME/src && umask 077 && git clone git@github.com:trancefixer/dotfiles.git)
 # This will install these dotfiles over your $HOME, so be very careful; -i flag means interactive (asks to overwrite)
-(cd $HOME/src/dotfiles && cp -piR ./ $HOME/)
+(cd $HOME/src/dotfiles && cp -pRi ./ $HOME/)
 ```
 
 ## what shells read what files
