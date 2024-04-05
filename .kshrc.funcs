@@ -72,7 +72,7 @@ case $- in *i*)
     yubi () {
 	export GPG_TTY="$(tty)"
 	export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
-	gpg-connect-agent updater startup tty /bye
+	gpg-connect-agent updatestartuptty /bye
 	gpg-connect-agent /bye
 	gpgconf --launch gpg-agent
     }
