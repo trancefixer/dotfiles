@@ -75,6 +75,7 @@ case $- in *i*)
 	gpg-connect-agent updatestartuptty /bye
 	gpg-connect-agent /bye
 	gpgconf --launch gpg-agent
+	gpg --card-status > /dev/null || echo "gpg --card-status failed"
     }
 
     ## screen-related
