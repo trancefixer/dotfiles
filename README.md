@@ -35,11 +35,10 @@ Therefore, these files are read by these shells:
 | $ENV | | Y | Y | Y |
 
 To test a created .procmailrc, use:
-procmail -Yf- -m TEST=yes .procmailrc
-Then, input a test message on STDIN.
-You may also want to set LOGNAME.
-Expect a spurious bounce on large emails, but look for the first rule matched
 
+`procmail -Yf- -m TEST=yes .procmailrc`
+
+Then, input a test message on STDIN.  You may also want to set LOGNAME.  Expect a spurious bounce on large emails, but look for the first rule matched.
 
 ## startup shell scripts
 I'm starting with my shell startup scripts and will gradually add more.
