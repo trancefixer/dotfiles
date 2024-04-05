@@ -1,5 +1,5 @@
 # Hey EMACS this is -*- mode:sh -*-
-# $Id: 5548a3cde3f755bad445e818bfafeef6bfddf98f $
+# $Id$
 # Managed in https://github.com/trancefixer/homedir; do not edit the copy in the home directory
 # Consider -A; resize all windows attached
 escape ^Ff
