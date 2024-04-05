@@ -284,13 +284,12 @@ else
     trap 'clear' 0
 fi
 ```
-This code takes care of cleaning up when we log out. If `$HOME/.shlogout` exists and is readable, we evaluate that and exit
-with the last command's exit code; otherwise we just clear the screen so that we don't leave our work showing.
+This code takes care of cleaning up when we log out.
 That is, this code runs when a login shell exits.
+If `$HOME/.shlogout` exists and is readable, we evaluate that and exit
+with the last command's exit code; otherwise we just clear the screen so that we don't leave our work showing.
 If the logout process varied from site to site, it might be more appropriate to put it in the site-specific section.
+You could easily do some kind of disk wiping or encryption here.
 
 (more to come)
 
-This section makes sure to run `$HOME/.shlogout` when the login shell exits so you can clean some things up.
-There's a `clear` command in here because this harkens back to the days of green screens,
-and you wanted to not leave personal data behind.  You could easily do some kind of disk wiping or encryption here.
