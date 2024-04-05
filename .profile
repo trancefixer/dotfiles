@@ -20,7 +20,7 @@ e2 () { echo "$@" >&2; }
 e2 'Running .profile'
 
 ## Set a semi-paranoid umask.
-umask 007
+umask 077
 
 ## Set colon-seperated search path elements:
 
