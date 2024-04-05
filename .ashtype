@@ -1,0 +1,84 @@
+#! /bin/sh -
+# $Id:$
+# This should be, but is not, a builtin in /bin/ash.
+
+type () {
+	local path=false
+	emit_cmd () { if $path; then echo "$2"; else echo "$1 is $2"; fi; }
+	emit_other () { if $path; then :; else echo "$1 is $2"; fi; }
+	test "$1" = "-path" && { path=true; shift; }
+	if test $# -ne 1
+	then
+		echo "Usage: type [-path] command" >&2
+		return 2
+	fi
+	local cmd="$1"
+	case "$cmd" in
+	elif|fi|while|case|else|for|then|!|{|}|do|done|until|if|esac)
+	    emit_other "$cmd" "a shell keyword"
+	    return 0
+	    ;;
+	esac
+	# aliases override functions and builtins but not a shell keyword
+	local aliasout="`alias $cmd 2> /dev/null`"
+	case "$aliasout"
+	in
+	    "alias $cmd="*)
+		local oifs="$IFS"
+		IFS="="
+		set -- $aliasout
+		shift
+		emit_other "$cmd" "an alias for $*"
+		IFS="$oifs"
+		return 0
+		;;
+	esac
+	local hashout="`hash -v $cmd 2> /dev/null`"
+	case "$hashout"
+	in
+	    "function $cmd "*|"builtin $cmd")
+		set -- $hashout
+		emit_other "$cmd" "a $1"
+		return 0
+		;;
+	    */$cmd)
+		emit_cmd "$cmd" "$hashout"
+		return 0
+		;;
+	esac
+	# this is if hash -v didn't work for some reason
+        hash | {
+            local l
+            while read l; do
+                if test "$l" = "function $cmd"
+                then
+                    emit_other "$cmd" "a function"
+                    return 127
+                fi
+            done
+        }
+        test "$?" -eq 127 && return 0
+	local typeout
+	case "$cmd" in
+	.|bg|bltin|cd|echo|eval|exec|exit|export|fg|getopts|hash|jobid|jobs|lc|local|pwd|read|readonly|return|set|setvar|shift|trap|umask|unset|wait)
+		emit_other "$cmd" "a builtin"
+		return 0
+		;;
+	*)
+		local oifs="$IFS"
+		IFS=":"
+		local pathseg
+		for pathseg in $PATH
+		do
+			if test -x "$pathseg/$cmd"
+			then
+				emit_cmd "$cmd" "$pathseg/$cmd"
+				return 0
+			fi
+		done
+		IFS="$oifs"
+		;;
+	esac
+	emit_other "$cmd" "not found"
+	return 1
+}
