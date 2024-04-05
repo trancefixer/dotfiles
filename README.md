@@ -90,7 +90,8 @@ The third line tells you not to touch this verison, the fourth line where to add
 
 Next I tell the user that the `.profile` is actually being run:
 
-```## Show login stuff:
+```
+## Show login stuff:
 
 # Echo message to fd 2 (stderr).
 e2 () { echo "$@" >&2; }
