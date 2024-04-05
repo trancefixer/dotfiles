@@ -13,6 +13,7 @@ I'm starting with my shell startup scripts and will gradually add more.
 * `.kshrc` # sourced for every subshell
 * `.bash_profile` # for bash-specific things
 * `.bashrc` # for bash-specific things
+* `.xsession` # for certain kinds of X window logins, used instead of login shell
 
 One of the key takeaways is that anything you would normally put into `.profile` can go into `.profile.local` and so on.
 This enables you to update these files without stomping on your local changes.
@@ -24,6 +25,10 @@ In general, you should add something to the bourne/ksh shell files unless it's b
 Of all the "dot files", `.profile` presents the greatest opportunity for customization.
 This file is read by sh derivatives as part of the login process, and usually sets environment variables that
 influence the behavior of many programs invoked as part of that login session.
+
+#### logging in
+
+##### via login(1)
 
 `sh` derivatives consider a shell a login shell when `argv[0]`, begins with a dash (`-`, ASCII value 45).
 Note that this is a violation of the convention that the first element of argv[] contain the last component
@@ -45,6 +50,13 @@ Note that `login(1)` will print a variety of messages, unless `$HOME/.nologin` e
 By the same rationale, we should feel free to output information from `.profile` under the same conditions.
 The nologin support is primarily for UUCP and other automated logins, so we need not heed this rule too carefully,
 unless you intend to use your .profile for your automated users as well.
+
+##### via X11 & window managers
+
+`.xsession` seems to be used, but I'm not sure exactly by which window managers # TODO
+
+
+##### about shell startup scripts generally
 
 Since we have the full power of the shell at our disposal when processing `.profile`, we may easily use its branching
 constructs to process different parts of this file under different conditions.  This allows us to potentially use the same `.profile`
