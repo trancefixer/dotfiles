@@ -1,0 +1,30 @@
+# $Id:$
+# see mh-profile(5):
+# note that even comment lines must contain a colon:
+Path: Mail
+Editor: prompter
+prompter-next: vi
+Msg-Protect: 600
+Folder-Protect: 700
+showproc: /usr/lib/nmh/mhl
+moreproc: less
+scan: -form /etc/nmh/scan.default
+forw: -editor forwedit
+forwedit-next: vi
+burst: -inplace
+repl: -editor vi -filter repl.filter -annotate -cc cc
+Draft-Folder: drafts
+Inbox: inbox
+Aliasfile: aliases
+# to avoid X problems:
+mhn-charset-iso-8859-1: /bin/sh -c '%s'
+# multimedia types:
+mhn-show-text/ascii: less '%F'
+mhn-show-text/plain: less '%F'
+mhn-show-message/delivery-status: less '%F'
+mhn-compose-application/x-pgp: pgp -seafm
+mhn-show-application/x-pgp: %l pgp -m '%F'
+mhn-show-application/pgp: %l pgp -m '%F'
+mhn-show-text/html: lynx -force_html file://localhost/%F
+mhn-show-text/x-html: lynx -force_html file://localhost/%F
+Unseen-Sequence: unseen
