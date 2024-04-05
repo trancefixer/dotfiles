@@ -291,6 +291,6 @@ If the logout process varied from site to site, it might be more appropriate to 
 
 (more to come)
 
-This section makes sure to run `$HOME/.shlogout' when the login shell exits so you can clean some things up.
+This section makes sure to run `$HOME/.shlogout` when the login shell exits so you can clean some things up.
 There's a `clear` command in here because this harkens back to the days of green screens,
 and you wanted to not leave personal data behind.  You could easily do some kind of disk wiping or encryption here.
