@@ -1,4 +1,7 @@
+# Hey EMACS this is -*- mode:sh -*-
 # $Id$
+# Managed in https://github.com/trancefixer/homedir; do not edit the copy in the home directory
+# To customize this script, put commands in the file $HOME/.bash_profile.local
 
 echo Running .bash_profile
 

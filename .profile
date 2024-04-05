@@ -1,5 +1,7 @@
-# $Id$
 # Hey EMACS this is -*- mode:sh -*-
+# $Id$
+# Managed in https://github.com/trancefixer/homedir; do not edit the copy in the home directory
+# To customize this script, put commands in the file $HOME/.profile.local
 
 # This is sourced at login-time by sh, ash, ksh, and bash.
 
@@ -9,8 +11,6 @@
 # Login script order:
 # sh, ash, ksh  /etc/profile ~/.profile
 # bash          /etc/profile (~/.bash_profile ~/.bash_login ~/.profile)
-
-# To customize this script, put commands in the file $HOME/.profile.local
 
 ## Show login stuff:
 
