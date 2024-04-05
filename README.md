@@ -78,7 +78,8 @@ you may wish to do so.
 ### the .profile line-by-line
 
 Here's a blow-by-blow for the file (could be out of date)
-```# Hey EMACS this is -*- mode:sh -*-
+```
+# Hey EMACS this is -*- mode:sh -*-
 # $Id: 5b47391d2186332499cdb604a33d41b1888903c4 $
 # Managed in https://github.com/trancefixer/homedir; do not edit the copy in the home directory
 # To customize this script, put commands in the file $HOME/.profile.local
@@ -118,7 +119,8 @@ Next I want to make sure that this `.profile` can find the programs I want to in
 `PATH` environment variable, which controls the search path for said programs.
 Clearly I will want some functions to help me manipulate the colon-seperated list of directories:
 
-```## Set colon-seperated search path elements:
+```
+## Set colon-seperated search path elements:
 
 # Test a directory (sanity check).
 # Returns true (0) only if it is a directory and searchable.
@@ -196,7 +198,8 @@ For usage errors I return 2 to distinguish from the exit code of the last comman
 Next I set up `PATH` elements which should always be present.
 I think all reasonable operating systems start `PATH` with these elements, but it shouldn't hurt much to be sure:
 
-```# These should be present on any target system.
+```
+# These should be present on any target system.
 # In fact, they should already be in the search path.
 dirapplist PATH /bin /usr/bin
 # I like to be able to run e.g. ifconfig, sendmail.
