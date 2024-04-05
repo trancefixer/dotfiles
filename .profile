@@ -111,7 +111,7 @@ manpath () {
 # In fact, they should already be in the search path.
 dirapplist PATH /bin /usr/bin
 # I like to be able to run e.g. ifconfig, sendmail.
-dirapplist PATH /sbin /usr/sbin /usr/games /usr/libexec /usr/ccs/bin
+dirapplist PATH /sbin /usr/sbin /usr/games /usr/libexec
 dirpre PATH /usr/ucb
 export PATH
 
@@ -124,7 +124,7 @@ dirapplist INFOPATH /usr/share/info
 export INFOPATH
 
 # Set the search path for python programs.
-dirapplist PYTHONPATH /lusr/lib/python2.3/site-packages
+dirapplist PYTHONPATH /lusr/lib/python2.3/site-packages # TODO: remove this hack
 
 ## Do shell-specific handling:
 
