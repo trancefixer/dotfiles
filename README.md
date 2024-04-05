@@ -9,9 +9,9 @@ I hope you can benefit from all the work that went into these.
 ## installation ##
 
 ```
-This will copy these dotfiles
+# This will copy these dotfiles
 mkdir $HOME/src && (cd $HOME/src && git clone git@github.com:trancefixer/dotfiles.git)
-This will install these dotfiles over your $HOME, so be very careful
+# This will install these dotfiles over your $HOME, so be very careful
 (cd $HOME/src/dotfiles && cp -piR ./ $HOME/)
 ```
 
