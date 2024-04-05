@@ -1,0 +1,14 @@
+# Hey EMACS this is -*- mode:sh -*-
+# $Id:$
+# Managed in https://github.com/trancefixer/homedir; do not edit the copy in the home directory
+# To customize this script, put commands in the file $HOME/.procmail.local
+# To test:
+# procmail -Ytf- -m TEST=yes VERBOSE=yes ~/.procmailrc < MAIL_HERE
+PATH=/bin:/usr/bin:/usr/local/bin
+MAILDIR=$HOME/Maildir
+LOGFILE=$HOME/.maillog
+# Not always appropriate? Different systems different INBOX names
+# DEFAULT=$MAILDIR/INBOX/
+INCLUDERC=$HOME/.procmailrc.local
+INCLUDERC=$HOME/.procmailrc.test
+
