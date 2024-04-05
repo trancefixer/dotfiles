@@ -66,6 +66,17 @@ case $- in *i*)
           echo Cannot find ssh agent - maybe you should reconnect and forward it?
     }
 
+    ## yubikey-related
+
+    # fix the yubikey
+    yubi () {
+	export GPG_TTY="$(tty)"
+	export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+	gpg-connect-agent updater startup tty /bye
+	gpg-connect-agent /bye
+	gpgconf --launch gpg-agent
+    }
+
     ## screen-related
 
     # set the screen title
