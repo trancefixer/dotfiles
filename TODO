@@ -1,0 +1,4 @@
+Stuff I need to do:
+Figure out how I want to instantiate/generate .forward so it comes out with everyone's name in the file contents
+- This requires a preprocessor/installer step which kind of sucks
+- Also have to determine and configure path to procmail
