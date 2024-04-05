@@ -1,0 +1,88 @@
+# -*- mode:sh -*-
+# $Id:$
+# do not edit the copy in the home directory
+
+# syntax from sh(1) to detect interactive shells
+case $- in *i*)
+
+    ### commands for interactive use only
+
+    ## Used by other functions
+
+    # error message
+    e2 () { echo "$@" >&2; }
+
+    ## SVN-related
+
+    # change to a SVN working directory
+    cdsvn () { cd "$HOME/svn/$1"; }
+    svncd () { cd "$HOME/svn/$1"; }
+
+    # import a bunch of files as a SVN project
+    svnimport () {
+      if test "$#" -lt 1; then
+        e2 "usage: svnimport projectname [files...]"
+        return 1
+      else
+        project="$1"
+        shift
+	svn import "$@" "$SVNROOT/trunk/$project"
+      fi
+    }
+
+    svnexport () {
+	if test "$#" -ne 1; then
+	    e2 "usage: svnexport projectname"
+	    return 1
+	else
+	    project="$1"
+	    (cd "$HOME"/tmp
+	     svn export $SVNROOT/tags/"$project"
+	     sanitize_files $(find "$project" -type f)
+	     tar -cvzf "$HOME"/me/distrib/"$project".tar.gz "$project")
+        fi
+    }
+
+    ## SSH-related
+
+    # persistent SSH
+    pssh () { while true; do ssh "$@"; sleep 5; done; }
+
+    # re-establish connection to orphaned ssh-agent(s)
+    # TODO - investigate if this needs to be secured better
+    ssh_reagent () {
+          for agent in /tmp/ssh-*/agent.*; do
+	      if test -G "$agent" && test -O "$agent"
+	      then
+		  export SSH_AUTH_SOCK=$agent
+		  if ssh-add -l 2>&1 > /dev/null; then
+                      echo Found working SSH Agent:
+                      ssh-add -l
+                      return
+		  fi
+	      fi
+          done
+          echo Cannot find ssh agent - maybe you should reconnect and forward it?
+    }
+
+    ## screen-related
+
+    # set the screen title
+    st () { echo -ne "\033k$*\033\\"; }
+
+    ## misc
+
+    # write to a log file
+    log () {
+      if test "$#" -lt 1; then
+        e2 "usage: log filename"
+	return 1
+      else
+	local f="$1"
+	(echo; echo; date) >> "$f"
+        # TODO: figure out a better way to start at the end of a file
+	emacs -nw +999999 "$f"
+      fi
+    }
+
+esac
