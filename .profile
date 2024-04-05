@@ -420,13 +420,21 @@ if PAGER=$(findinpath less); then
     # We found less so set less options:
     #   -M = more verbose than "more"
     #   -f = force special files to be opened
-    LESS="-Mf"
+    #   --raw-control-chars = allow raw control characters to be displayed, prevents weird vt100 bold format ESC issues
+    LESS="-Mf --raw-control-chars"
     export LESS
 
-    # latin1 Selects  the  ISO 8859/1 character set.  latin-1 is
-    #        the same as ASCII, except  characters  between  161
-    #        and 255 are treated as normal characters.
-    LESSCHARSET="latin1"
+    if true
+         # latin1 Selects  the  ISO 8859/1 character set.  latin-1 is
+         #        the same as ASCII, except  characters  between  161
+         #        and 255 are treated as normal characters.
+         LESSCHARSET="latin1"
+     else
+	 # recommended here:
+	 # https://serverfault.com/questions/395592/less-not-able-to-display-special-characters
+	 # didn't work
+	 LESSCHARSET="utf-8"
+    fi
     export LESSCHARSET
 else
     # Every system should have this.
