@@ -11,8 +11,8 @@ I hope you can benefit from all the work that went into these.
 ```
 # This will copy these dotfiles
 mkdir $HOME/src && (cd $HOME/src && umask 077 && git clone https://github.com/trancefixer/dotfiles.git)
-# This will install these dotfiles over your $HOME, so be very careful; -i flag means interactive (asks to overwrite)
-(cd $HOME/src/dotfiles && cp -pRi ./ $HOME/)
+cd ~/src/dotfiles
+rsync -av --backup --suffix=".local" --update --exclude .git --exclude README.md ./ $HOME/ 
 ```
 
 ## what shells read what files
