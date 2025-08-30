@@ -12,7 +12,7 @@ I hope you can benefit from all the work that went into these.
 # This will copy these dotfiles
 mkdir $HOME/src && (cd $HOME/src && umask 077 && git clone https://github.com/trancefixer/dotfiles.git)
 cd ~/src/dotfiles
-rsync -av --backup --suffix=".local" --update --exclude .git --exclude README.md ./ $HOME/ 
+rsync -av --backup --suffix=".local" --update --exclude .git --exclude README.md ./ $HOME/
 ```
 
 ## what shells read what files
