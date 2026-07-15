@@ -1,7 +1,9 @@
 # Hey EMACS this is -*- mode:sh -*-
 # $Id$
 # Managed in https://github.com/trancefixer/homedir; Do not edit the copy in the home directory
-# To customize this script, put commands in the file $HOME/.kshrc.local
+# To customize this script, put commands in the file $HOME/.bashrc.local
+
+test -r $HOME/.kshrc && . $HOME/.kshrc
 
 # I know, you're asking; why is this in the .rc file?
 # Because I don't want Bourne sub-shells getting this PS1; it doesn't work.
@@ -18,4 +20,3 @@ alias x='exec '
 alias xt='xterm -e '
 
 test -r $HOME/.bashrc.local && . $HOME/.bashrc.local
-test -r $HOME/.kshrc && . $HOME/.kshrc

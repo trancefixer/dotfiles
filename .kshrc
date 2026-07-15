@@ -99,7 +99,7 @@ case $- in *i*)
     alias e='echo'
     alias cdup='cd ..'
     alias lo='logout'
-    alias m='more'
+    alias l='less'
     alias h='history'
     alias k=kill
     alias j=jobs
@@ -238,6 +238,10 @@ case $- in *i*)
     # cause the next word to be checked for aliases, too
     alias x='exec '
     alias xt='xterm -e '
+
+    # This aliases mise-in-place (https://mise.jdx.dev/)
+    alias m='mise'
+    alias me='eval "$(mise activate ${SHELL##*/})"'
 esac
 
 test -r "$HOME/.kshrc.funcs" && . "$HOME/.kshrc.funcs"
