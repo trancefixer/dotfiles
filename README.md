@@ -14,6 +14,13 @@ I hope you can benefit from all the work that went into these.
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/trancefixer/dotfiles/main/install.sh)"
 ```
 
+### via chezmoi
+
+```
+brew install chezmoi
+chezmoi init --apply trancefixer
+```
+
 ### automatic (recommended) ####
 
 ```
