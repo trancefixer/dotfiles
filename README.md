@@ -8,6 +8,11 @@ I hope you can benefit from all the work that went into these.
 
 ## installation ##
 
+### one-line remote installation ###
+
+```
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/trancefixer/dotfiles/main/install.sh)"
+```
 
 ### automatic (recommended) ####
 
