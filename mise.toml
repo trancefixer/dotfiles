@@ -8,6 +8,21 @@ chezmoi = "latest"
 # Optional: Explicitly point chezmoi to a specific source directory if needed
 CHEZMOI_SOURCE_DIR = "{{ config_root }}"
 
+[tasks.setup]
+description = "Install dependencies and link dotfiles"
+run = "chezmoi apply"
+
+[tasks.update]
+description = "Pull latest dotfile changes and re-apply"
+run = """
+git pull origin main
+chezmoi apply
+"""
+
+[tasks.health]
+description = "Verify symlinks and environment setup"
+run = "chezmoi doctor"
+
 [tasks."dotfiles:apply"]
 description = "Apply chezmoi target state to home directory"
 run = "chezmoi apply"
