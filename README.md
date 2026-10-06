@@ -8,6 +8,16 @@ I hope you can benefit from all the work that went into these.
 
 ## installation ##
 
+
+### automatic (recommended) ####
+
+```
+mise install
+eval "$(mise activate)" || eval "$(mise activate ${SHELL##*/})"
+```
+
+### manual ####
+
 ```
 # This will copy these dotfiles
 mkdir $HOME/src && (cd $HOME/src && umask 077 && git clone https://github.com/trancefixer/dotfiles.git)
