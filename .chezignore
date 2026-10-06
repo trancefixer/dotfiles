@@ -1,0 +1,6 @@
+# Ignores repository documentation and metadata
+README.md
+TODO
+LICENSE
+.github/
+.git/
