@@ -10,27 +10,27 @@ I hope you can benefit from all the work that went into these.
 
 ### one-line remote installation ###
 
-```
+```sh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/trancefixer/dotfiles/main/install.sh)"
 ```
 
 ### via chezmoi
 
-```
+```sh
 brew install chezmoi
 chezmoi init --apply trancefixer
 ```
 
 ### automatic (recommended) ####
 
-```
+```sh
 mise install
 eval "$(mise activate)" || eval "$(mise activate ${SHELL##*/})"
 ```
 
 ### manual ####
 
-```
+```sh
 # This will copy these dotfiles
 mkdir $HOME/src && (cd $HOME/src && umask 077 && git clone https://github.com/trancefixer/dotfiles.git)
 cd ~/src/dotfiles
