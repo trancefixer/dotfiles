@@ -37,6 +37,14 @@ cd ~/src/dotfiles
 rsync -av --backup --suffix=".local" --update --exclude .git --exclude README.md ./ $HOME/
 ```
 
+## update an existing machine ##
+
+### via chezmoi
+
+```sh
+chezmoi update
+```
+
 ## what shells read what files
 
 ash reads:
