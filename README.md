@@ -24,17 +24,27 @@ chezmoi init --apply trancefixer
 ### automatic (recommended) ####
 
 ```sh
-mise install
-eval "$(mise activate)" || eval "$(mise activate ${SHELL##*/})"
+mise use --global chezmoi@latest
+eval "$(mise activate)" || eval "$(mise activate${SHELL##*/})"
+chezmoi init --apply trancefixer
 ```
 
 ### manual ####
 
 ```sh
-# This will copy these dotfiles
-mkdir $HOME/src && (cd $HOME/src && umask 077 && git clone https://github.com/trancefixer/dotfiles.git)
-cd ~/src/dotfiles
-rsync -av --backup --suffix=".local" --update --exclude .git --exclude README.md ./ $HOME/
+# Clones the repo, strips Chezmoi prefixes into $HOME, and backs up existing files to *.local
+mkdir -p "$HOME/src" && (cd "$HOME/src" && umask 077 && git clone [https://github.com/trancefixer/dotfiles.git](https://github.com/trancefixer/dotfiles.git))
+cd "$HOME/src/dotfiles/home" && find . -type f | while IFS= read -r f; do
+  rel=$(printf '\%s' "$f" | sed \
+    -e 's|^\./||' \
+    -e 's|/\(private_\)\{0,1\}\(executable_\)\{0,1\}dot_|/.|g' \
+    -e 's|^\(private_\)\{0,1\}\(executable_\)\{0,1\}dot_|.|' \
+    -e 's|/\(private_\)\{0,1\}executable_|/|g')
+  dest="$HOME/$rel"
+  mkdir -p "$(dirname "$dest")"
+  [ -e "$dest" ] && cp -p "$dest" "$dest.local"
+  cp -p "$f" "$dest"
+done
 ```
 
 ## update an existing machine ##
