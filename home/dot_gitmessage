@@ -1,0 +1,5 @@
+# <type>(<scope>): [<JIRA-KEY>] <subject>
+#
+# Types : feat | fix | chore | docs | refactor | style | test | build | ci
+# Scope : git | ssh | chezmoi | mise | zsh | emacs | repo
+# Jira  : [COM-123] (required on every commit)
