@@ -1,25 +1,24 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 set -eu
 
 DOTFILES_REPO="https://github.com/trancefixer/dotfiles.git"
+BRANCH="${1:-main}"
 
-echo "==> Bootstrapping dotfiles..."
+echo "==> Bootstrapping dotfiles (branch: $BRANCH)..."
 
-# 1. Install mise if missing
+# 1. Install mise if missing (mise.run installs to ~/.local/bin/mise)
+export PATH="$HOME/.local/bin:$PATH"
 if ! command -v mise >/dev/null 2>&1; then
   echo "==> Installing mise..."
-  curl https://mise.run | sh
-  export PATH="$HOME/.local/share/mise/bin:$PATH"
+  curl -fsSL https://mise.run | sh
 fi
 
-# 2. Run chezmoi or stow via mise
+# 2. Install chezmoi via mise and apply dotfiles
 if command -v chezmoi >/dev/null 2>&1; then
-  chezmoi init --apply trancefixer
+  chezmoi init --apply --branch "$BRANCH" "$DOTFILES_REPO"
 else
-  # Fallback to cloning directly if using custom install script
-  mise trust
-  mise install
-  mise run setup
+  mise use --global chezmoi@latest
+  mise exec chezmoi@latest -- chezmoi init --apply --branch "$BRANCH" "$DOTFILES_REPO"
 fi
 
 echo "==> Setup complete!"
