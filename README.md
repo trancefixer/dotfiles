@@ -1,6 +1,6 @@
 * [Installation](#installation)
 * [Updating an Existing Machine](#update-an-existing-machine)
-* [Dotfile Execution Order](#execution-order) (#what-shells-read-what-files)
+* [Dotfile Execution Order](#what-shells-read-what-files)
 
 # homedir
 home directory config files
