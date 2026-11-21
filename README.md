@@ -14,22 +14,39 @@ I hope you can benefit from all the work that went into these.
 
 ### one-line remote installation ###
 
+Attempt to use curl or wget to install by downloading and running install.sh
+
 ```sh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/trancefixer/dotfiles/main/install.sh)"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/trancefixer/dotfiles/main/install.sh || wget -qO- https://raw.githubusercontent.com/trancefixer/dotfiles/main/install.sh)"
 ```
 
 ### via chezmoi
 
 ```sh
-brew install chezmoi
+# Installs chezmoi to ~/.local/bin and applies dotfiles in one step
+sh -c "$(curl -fsLS get.chezmoi.io)" -- -b "$HOME/.local/bin" init --apply trancefixer
+```
+
+#### Mac-specific alternative
+
+```sh
+brew install chezmoi && chezmoi init --apply trancefixer
+```
+
+#### Linux-specific alternative
+
+```sh
+sudo snap install chezmoi || sudo pacman install chezmoi || sudo apt install chezmoi
 chezmoi init --apply trancefixer
 ```
 
-### automatic (recommended) ####
+### Using mise ####
 
 ```sh
+export PATH="$HOME/.local/bin:$PATH"
+brew install mise || sudo snap install mise || sudo pacman install mise || sudo apt install mise
 mise use --global chezmoi@latest
-eval "$(mise activate)" || eval "$(mise activate${SHELL##*/})"
+eval "$(mise activate)" || eval "$(mise activate ${SHELL##*/})"
 chezmoi init --apply trancefixer
 ```
 
@@ -37,17 +54,24 @@ chezmoi init --apply trancefixer
 
 ```sh
 # Clones the repo, strips Chezmoi prefixes into $HOME, and backs up existing files to *.local
-mkdir -p "$HOME/src" && (cd "$HOME/src" && umask 077 && git clone [https://github.com/trancefixer/dotfiles.git](https://github.com/trancefixer/dotfiles.git))
+mkdir -p "$HOME/src" && (
+  cd "$HOME/src" && umask 077 && git clone https://github.com/trancefixer/dotfiles.git
+)
+
 cd "$HOME/src/dotfiles/home" && find . -type f | while IFS= read -r f; do
-  rel=$(printf '\%s' "$f" | sed \
+  rel=$(printf '%s' "$f" | sed \
     -e 's|^\./||' \
     -e 's|/\(private_\)\{0,1\}\(executable_\)\{0,1\}dot_|/.|g' \
     -e 's|^\(private_\)\{0,1\}\(executable_\)\{0,1\}dot_|.|' \
-    -e 's|/\(private_\)\{0,1\}executable_|/|g')
+    -e 's|/\(private_\)\{0,1\}executable_|/|g' \
+    -e 's|^\(private_\)\{0,1\}executable_||')
   dest="$HOME/$rel"
   mkdir -p "$(dirname "$dest")"
-  [ -e "$dest" ] && cp -p "$dest" "$dest.local"
+  if [ -e "$dest" ] && [ ! -e "$dest.local" ]; then
+    cp -p "$dest" "$dest.local"
+  fi
   cp -p "$f" "$dest"
+  case "$f" in *executable_*) chmod +x "$dest" ;; esac
 done
 ```
 
