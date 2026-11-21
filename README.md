@@ -25,6 +25,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/trancefixer/dotfiles/main/
 ```sh
 # Installs chezmoi to ~/.local/bin and applies dotfiles in one step
 sh -c "$(curl -fsLS get.chezmoi.io)" -- -b "$HOME/.local/bin" init --apply trancefixer
+export PATH="$HOME/.local/bin:$PATH" # fix this until next login and the dotfiles take effect
 ```
 
 #### Mac-specific alternative
@@ -36,7 +37,7 @@ brew install chezmoi && chezmoi init --apply trancefixer
 #### Linux-specific alternative
 
 ```sh
-sudo snap install chezmoi || sudo pacman install chezmoi || sudo apt install chezmoi
+sudo snap install chezmoi || sudo pacman -S --noconfirm chezmoi || sudo apt install -y chezmoi
 chezmoi init --apply trancefixer
 ```
 
@@ -44,9 +45,9 @@ chezmoi init --apply trancefixer
 
 ```sh
 export PATH="$HOME/.local/bin:$PATH"
-brew install mise || sudo snap install mise || sudo pacman install mise || sudo apt install mise
+(curl -fsSL https://mise.run || wget -qO- https://mise.run) | sh
 mise use --global chezmoi@latest
-eval "$(mise activate)" || eval "$(mise activate ${SHELL##*/})"
+eval "$(mise activate)" || eval "$(mise activate "${SHELL##*/}")"
 chezmoi init --apply trancefixer
 ```
 
