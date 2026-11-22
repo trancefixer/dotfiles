@@ -2,8 +2,8 @@
 * [Updating an Existing Machine](#update-an-existing-machine)
 * [Dotfile Execution Order](#what-shells-read-what-files)
 
-# homedir
-home directory config files
+# dotfiles
+$HOME directory config files
 
 These are some home directory files that I have honed over the decades, and decided to finally share.
 I think they've proven useful and stable enough that they should work in most Unix environments.
@@ -24,7 +24,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/trancefixer/dotfiles/main/
 
 ```sh
 # Installs chezmoi to ~/.local/bin and applies dotfiles in one step
-sh -c "$(curl -fsLS get.chezmoi.io)" -- -b "$HOME/.local/bin" init --apply trancefixer
+sh -c "$(curl -fsLS get.chezmoi.io || wget -qO- get.chezmoi.io)" -- -b "$HOME/.local/bin" init --apply trancefixer
 export PATH="$HOME/.local/bin:$PATH" # fix this until next login and the dotfiles take effect
 ```
 
@@ -41,7 +41,7 @@ sudo snap install chezmoi || sudo pacman -S --noconfirm chezmoi || sudo apt inst
 chezmoi init --apply trancefixer
 ```
 
-### Using mise ####
+### using mise ####
 
 ```sh
 export PATH="$HOME/.local/bin:$PATH"
@@ -240,7 +240,7 @@ umask 007
 
 Next I want to make sure that this `.profile` can find the programs I want to invoke, so I must attend to setting the
 `PATH` environment variable, which controls the search path for said programs.
-Clearly I will want some functions to help me manipulate the colon-seperated list of directories:
+Clearly I will want some functions to help me manipulate the colon-separated list of directories:
 
 ```
 ## Set colon-seperated search path elements:
