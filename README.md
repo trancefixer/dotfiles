@@ -204,7 +204,7 @@ you may wish to do so.
 Here's a blow-by-blow for the file (could be out of date)
 ```
 # Hey EMACS this is -*- mode:sh -*-
-# Managed in https://github.com/trancefixer/homedir; do not edit the copy in the home directory
+# Managed in https://github.com/trancefixer/dotfiles; do not edit the copy in the home directory
 # To customize this script, put commands in the file $HOME/.profile.local
 ```
 
