@@ -1,0 +1,68 @@
+# ~/.config/git/config (or ~/.gitconfig)
+# Global Git heuristics and security hardening (ported from foundation task/setup-git)
+
+# Fail-Closed Identity & Linear History
+[user]
+	useConfigOnly = true
+
+[merge]
+	ff = only
+	conflictStyle = zdiff3
+
+# Diff & Merge Optimization (Algorithmic Fidelity)
+[diff]
+	algorithm = histogram
+
+[rerere]
+	enabled = true
+	autoupdate = true
+
+# Ergonomics & Branch Navigation Optimization
+[push]
+	autoSetupRemote = true
+
+[branch]
+	sort = -committerdate
+
+[column]
+	ui = auto
+
+[tag]
+	sort = version:refname
+
+[pull]
+	rebase = true
+
+[rebase]
+	autoStash = true
+
+# Quality-of-Life improvements
+[fetch]
+	prune = true
+	fsckObjects = true
+
+# Security & Transport Hardening
+# Do as much as we can to stop CVE-2025-48384
+# This will materialize all symlinks by the way
+[core]
+	symlinks = false
+
+[protocol "file"]
+	allow = user
+
+# Override on a per-repo basis as needed
+[submodule]
+	update = none
+
+[transfer]
+	fsckObjects = true
+
+[receive]
+	fsckObjects = true
+
+# Blame & History Formatting (uncomment if ~/.git-blame-ignore-revs and ~/.gitmessage exist)
+# [blame]
+# 	ignoreRevsFile = ~/.git-blame-ignore-revs
+#
+[commit]
+	template = ~/.gitmessage
