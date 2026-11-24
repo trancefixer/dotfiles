@@ -1,73 +1,78 @@
 # ~/.config/git/config
 # Global Git heuristics, security hardening (ported from foundation task/setup-git),
 # and conditional per-workspace identity routing.
+# Companion XDG files auto-loaded by Git: ~/.config/git/ignore, ~/.config/git/attributes
 
 # Fail-Closed Identity & Linear History
 [user]
-	useConfigOnly = true
+        useConfigOnly = true
 
 [merge]
-	ff = only
-	conflictStyle = zdiff3
+        ff = only
+        conflictStyle = zdiff3
 
 # Diff & Merge Optimization (Algorithmic Fidelity)
 [diff]
-	algorithm = histogram
+        algorithm = histogram
 
 [rerere]
-	enabled = true
-	autoupdate = true
+        enabled = true
+        autoupdate = true
 
 # Ergonomics & Branch Navigation Optimization
 [push]
-	default = simple
-	autoSetupRemote = true
-	followTags = false
+        default = simple
+        autoSetupRemote = true
+        followTags = false
 
 [branch]
-	sort = -committerdate
+        sort = -committerdate
 
 [column]
-	ui = auto
+        ui = auto
 
 [tag]
-	sort = version:refname
+        sort = version:refname
 
 [pull]
-	rebase = true
+        rebase = true
 
 [rebase]
-	autoStash = true
-	missingCommitsCheck = error
+        autoStash = true
+        missingCommitsCheck = error
 
 # Quality-of-Life improvements
 [fetch]
-	prune = true
-	fsckObjects = true
+        prune = true
+        fsckObjects = true
 
 # Security & Transport Hardening
 # Do as much as we can to stop CVE-2025-48384
 # This will materialize all symlinks by the way
 [core]
-	symlinks = false
-	excludesFile = ~/.gitignore_global
+        symlinks = false
 
 [protocol "file"]
-	allow = user
+        allow = user
 
 # Override on a per-repo basis as needed
 [submodule]
-	update = none
+        update = none
 
 [transfer]
-	fsckObjects = true
+        fsckObjects = true
 
 [receive]
-	fsckObjects = true
+        fsckObjects = true
 
-# Blame & History Formatting (uncomment ignoreRevsFile if ~/.git-blame-ignore-revs exists)
+# Blame & History Formatting (uncomment ignoreRevsFile if ~/.config/git/blame-ignore-revs exists)
 # [blame]
-# 	ignoreRevsFile = ~/.git-blame-ignore-revs
+#       ignoreRevsFile = ~/.config/git/blame-ignore-revs
 
 [commit]
-	template = ~/.gitmessage
+        template = ~/.config/git/message
+
+# Load private workspace includeIf routing when dotfiles-private is applied
+# (Git silently skips missing [include] paths on public-only hosts)
+[include]
+        path = ~/.config/git/config.private
