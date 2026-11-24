@@ -1,5 +1,6 @@
-# ~/.config/git/config (or ~/.gitconfig)
-# Global Git heuristics and security hardening (ported from foundation task/setup-git)
+# ~/.config/git/config
+# Global Git heuristics, security hardening (ported from foundation task/setup-git),
+# and conditional per-workspace identity routing.
 
 # Fail-Closed Identity & Linear History
 [user]
@@ -19,7 +20,9 @@
 
 # Ergonomics & Branch Navigation Optimization
 [push]
+	default = simple
 	autoSetupRemote = true
+	followTags = false
 
 [branch]
 	sort = -committerdate
@@ -35,6 +38,7 @@
 
 [rebase]
 	autoStash = true
+	missingCommitsCheck = error
 
 # Quality-of-Life improvements
 [fetch]
@@ -46,6 +50,7 @@
 # This will materialize all symlinks by the way
 [core]
 	symlinks = false
+	excludesFile = ~/.gitignore_global
 
 [protocol "file"]
 	allow = user
@@ -60,9 +65,9 @@
 [receive]
 	fsckObjects = true
 
-# Blame & History Formatting (uncomment if ~/.git-blame-ignore-revs and ~/.gitmessage exist)
+# Blame & History Formatting (uncomment ignoreRevsFile if ~/.git-blame-ignore-revs exists)
 # [blame]
 # 	ignoreRevsFile = ~/.git-blame-ignore-revs
-#
+
 [commit]
 	template = ~/.gitmessage
