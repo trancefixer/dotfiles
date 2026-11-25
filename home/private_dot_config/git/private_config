@@ -68,9 +68,8 @@
 # Blame & History Formatting (uncomment ignoreRevsFile if ~/.config/git/blame-ignore-revs exists)
 # [blame]
 #       ignoreRevsFile = ~/.config/git/blame-ignore-revs
-
-[commit]
-        template = ~/.config/git/message
+# [commit]
+#       template = ~/.config/git/message
 
 # Load private workspace includeIf routing when dotfiles-private is applied
 # (Git silently skips missing [include] paths on public-only hosts)
